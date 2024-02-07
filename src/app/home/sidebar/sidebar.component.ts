@@ -135,6 +135,7 @@ export class SidebarComponent {
             <p><span class="font-bold">Descripción:</span> ${registerVisit.description}</p>
           `);
         });
+        this.content.map.map.setZoom(12);
       }
     });
   }
