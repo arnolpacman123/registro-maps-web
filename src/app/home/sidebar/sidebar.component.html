@@ -25,14 +25,11 @@
       </button>
       <h1 class="text-center title" style="margin-top: 20px;">Lugares Visitados</h1>
       @for (registerVisit of registerVisits; track registerVisit.id) {
-        <mat-card class="example-card cursor-pointer">
+        <mat-card class="example-card cursor-pointer" (click)="selectLocation(registerVisit)">
           <mat-card-content class="mt-3">
             <p class="text-xs mb-0 line-clamp-2"><span class="font-bold">Dirección:</span> {{ registerVisit.address }}
             </p>
-            <p class="text-xs">{{ registerVisit.description }}</p>
-            <p class="text-xs"><span class="font-bold">Coordenadas:</span> {{ registerVisit.geom.coordinates[0] }}
-              , {{ registerVisit.geom.coordinates[1] }}</p>
-            <p class="text-xs">{{ registerVisit.description }}</p>
+            <p class="text-xs"><span class="font-bold">Coordenadas:</span> {{ registerVisit.geom.coordinates[0] }}, {{ registerVisit.geom.coordinates[1] }}</p>
             <p class="text-xs">
               <span class="font-bold">Fecha y Hora:</span>
               {{ registerVisit.hour | date: 'dd/MM/yyyy HH:mm:ss': 'GMT-4' }}

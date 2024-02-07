@@ -146,4 +146,15 @@ export class SidebarComponent {
     dialogRef.afterClosed().subscribe(_ => {
     });
   }
+
+  selectLocation(registerVisit: RegisterVisit) {
+    this.content.map.map.setView([ registerVisit.geom.coordinates[1], registerVisit.geom.coordinates[0] ], 18);
+    // Encontrar el marcador que corresponde a la ubicación seleccionada
+    const marker = this.content.map.markers.find((marker) => {
+      const coordinates = marker.getLatLng();
+      return coordinates.lat === registerVisit.geom.coordinates[1] && coordinates.lng === registerVisit.geom.coordinates[0];
+    });
+    if (marker) marker.openPopup();
+    this.drawer.close();
+  }
 }
