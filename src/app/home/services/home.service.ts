@@ -10,7 +10,7 @@ import { RegisterVisit } from "../interfaces/register-visit.interface";
   providedIn: 'root'
 })
 export class HomeService {
-  apiUrl = 'http://localhost:3000/api';
+  apiUrl = 'https://registro-maps-api.adaptable.app/api';
   mapDataOSMUrl = 'https://nominatim.openstreetmap.org/reverse?format=json';
   httpClient = inject(HttpClient);
 
