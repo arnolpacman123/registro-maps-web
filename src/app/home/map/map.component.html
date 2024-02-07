@@ -1,0 +1,12 @@
+<div id="map" (leafletMapReady)="onMapReady($event)" style="height: 100%; width: 100%;" leaflet
+     [leafletOptions]="options" [leafletLayersControl]="layersControl">
+  @for(marker of markers; track marker) {
+    <div [leafletLayer]="marker">
+    </div>
+  }
+</div>
+<leaflet-locate-control
+  [options]="locateOptions"
+  [map]="map"
+  (location$)="_onNewLocation($event)"
+></leaflet-locate-control>

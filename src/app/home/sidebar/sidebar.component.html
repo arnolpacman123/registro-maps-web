@@ -1,0 +1,56 @@
+<mat-drawer-container autosize class="example-container">
+  <mat-drawer #drawer mode="over" class="example-sidenav">
+    @if (!userOptionSelected) {
+      @if (persons.length > 0) {
+        <h1 class="text-center title" style="margin-top: 20px;">OPCIONES</h1>
+        @for (option of listOptions; track option.name) {
+          <mat-card class="example-card cursor-pointer" (click)="option.onClick()">
+            <mat-card-header>
+              <mat-card-title>
+                <div style="display: flex; align-items: center;">
+                  <mat-icon>{{ option.icon }}</mat-icon>
+                  <div class="ml-1"><span class="text-center text">{{ option.name }}</span></div>
+                </div>
+              </mat-card-title>
+            </mat-card-header>
+            <mat-card-content class="ml-7 mt-3">
+              <p class="">{{ option.description }}</p>
+            </mat-card-content>
+          </mat-card>
+        }
+      }
+    } @else {
+      <button mat-raised-button color="primary" (click)="userOptionSelected = !userOptionSelected" class="back-button">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <h1 class="text-center title" style="margin-top: 20px;">Lugares Visitados</h1>
+      @for (registerVisit of registerVisits; track registerVisit.id) {
+        <mat-card class="example-card cursor-pointer">
+          <mat-card-content class="mt-3">
+            <p class="text-xs mb-0 line-clamp-2"><span class="font-bold">Dirección:</span> {{ registerVisit.address }}
+            </p>
+            <p class="text-xs">{{ registerVisit.description }}</p>
+            <p class="text-xs"><span class="font-bold">Coordenadas:</span> {{ registerVisit.geom.coordinates[0] }}
+              , {{ registerVisit.geom.coordinates[1] }}</p>
+            <p class="text-xs">{{ registerVisit.description }}</p>
+            <p class="text-xs">
+              <span class="font-bold">Fecha y Hora:</span>
+              {{ registerVisit.hour | date: 'dd/MM/yyyy HH:mm:ss': 'GMT-8' }}
+            </p>
+            <p class="text-xs">
+              <span class="font-bold">Descripción:</span>
+              {{ registerVisit.description }}
+            </p>
+          </mat-card-content>
+        </mat-card>
+      } @empty {
+        <h1 class="text-center title" style="margin-top: 20px;">No hay lugares visitados</h1>
+      }
+    }
+  </mat-drawer>
+
+  <mat-drawer-content>
+    <app-content [drawer]="drawer" (onNewLocation)="onNewLocation($event)"
+                 (onLocateDeactivate)="onLocateDeactivate()"></app-content>
+  </mat-drawer-content>
+</mat-drawer-container>
