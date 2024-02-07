@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { LeafletModule, LeafletControlLayersConfig } from "@asymmetrik/ngx-leaflet";
 import {
   latLng,
@@ -13,7 +13,6 @@ import {
   icon
 } from "leaflet";
 import { NgxLeafletLocateModule } from "@runette/ngx-leaflet-locate";
-import { MapService } from "./map.service";
 
 @Component({
   selector: 'app-map',
@@ -67,7 +66,6 @@ export class MapComponent {
   };
   myLocation?: LatLng;
   markers: Marker[] = [];
-  mapService = inject(MapService);
   @Output() onNewLocation = new EventEmitter<LocationEvent>();
   @Output() onLocateDeactivate = new EventEmitter<void>();
 
@@ -96,9 +94,5 @@ export class MapComponent {
     });
     this.markers.push(marker);
     marker.addTo(this.map);
-  }
-
-  async getMapData() {
-    return await this.mapService.getMapData(this.myLocation!.lat, this.myLocation!.lng);
   }
 }
