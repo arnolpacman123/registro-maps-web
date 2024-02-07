@@ -130,7 +130,7 @@ export class SidebarComponent {
             <p class="line-clamp-3"><b>Dirección:</b> ${registerVisit.address}</p>
             <p>
               <span class="font-bold">Fecha y Hora:</span>
-              ${new DatePipe('en-US').transform(registerVisit.hour, 'dd/MM/yyyy HH:mm:ss', 'GMT-8')}
+              ${new DatePipe('en-US').transform(registerVisit.hour, 'dd/MM/yyyy HH:mm:ss', 'GMT-4')}
             </p>
             <p><span class="font-bold">Descripción:</span> ${registerVisit.description}</p>
           `);
