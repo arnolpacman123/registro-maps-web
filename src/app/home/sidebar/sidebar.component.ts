@@ -135,7 +135,7 @@ export class SidebarComponent {
             <p><span class="font-bold">Descripción:</span> ${ registerVisit.description }</p>
           `);
         });
-        this.content.map.map.setZoom(12);
+        this.content.map.map.setView([ -17.7834, -63.1821 ], 12);
       }
     });
   }
