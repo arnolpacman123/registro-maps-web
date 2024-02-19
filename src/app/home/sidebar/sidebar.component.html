@@ -1,5 +1,6 @@
 <mat-drawer-container autosize class="example-container">
-  <mat-drawer #drawer mode="over" class="example-sidenav">
+<!-- Mantener el estado de la opción seleccionada -->
+  <mat-drawer #drawer mode="over" class="example-sidenav" [autoFocus]="false">
     @if (!userOptionSelected) {
       @if (persons.length > 0) {
         <h1 class="text-center title" style="margin-top: 20px;">OPCIONES</h1>

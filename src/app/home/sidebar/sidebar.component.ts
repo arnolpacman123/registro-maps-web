@@ -126,13 +126,13 @@ export class SidebarComponent {
               iconUrl: 'https://creazilla-store.fra1.digitaloceanspaces.com/icons/3433554/google-icon-md.png',
             }),
           }).bindPopup(`
-            <p><span class="font-bold">Coordenadas:</span> ${registerVisit.geom.coordinates[1]}, ${registerVisit.geom.coordinates[0]}</p>
-            <p class="line-clamp-3"><b>Dirección:</b> ${registerVisit.address}</p>
+            <p><span class="font-bold">Coordenadas:</span> ${ registerVisit.geom.coordinates[1] }, ${ registerVisit.geom.coordinates[0] }</p>
+            <p class="line-clamp-3"><b>Dirección:</b> ${ registerVisit.address }</p>
             <p>
               <span class="font-bold">Fecha y Hora:</span>
-              ${new DatePipe('en-US').transform(registerVisit.hour, 'dd/MM/yyyy HH:mm:ss', 'GMT-4')}
+              ${ new DatePipe('en-US').transform(registerVisit.hour, 'dd/MM/yyyy HH:mm:ss', 'GMT-4') }
             </p>
-            <p><span class="font-bold">Descripción:</span> ${registerVisit.description}</p>
+            <p><span class="font-bold">Descripción:</span> ${ registerVisit.description }</p>
           `);
         });
         this.content.map.map.setZoom(12);
@@ -149,7 +149,6 @@ export class SidebarComponent {
 
   selectLocation(registerVisit: RegisterVisit) {
     this.content.map.map.setView([ registerVisit.geom.coordinates[1], registerVisit.geom.coordinates[0] ], 18);
-    // Encontrar el marcador que corresponde a la ubicación seleccionada
     const marker = this.content.map.markers.find((marker) => {
       const coordinates = marker.getLatLng();
       return coordinates.lat === registerVisit.geom.coordinates[1] && coordinates.lng === registerVisit.geom.coordinates[0];
