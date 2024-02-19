@@ -32,6 +32,7 @@ export class MapComponent {
     attributionControl: false,
     zoom: 13,
     center: latLng(-17.7834, -63.1821),
+    doubleClickZoom: false,
   };
 
   layersControl: LeafletControlLayersConfig = {
@@ -89,7 +90,7 @@ export class MapComponent {
       icon: icon({
         iconSize: [ 25, 41 ],
         iconAnchor: [ 13, 41 ],
-        iconUrl: 'https://creazilla-store.fra1.digitaloceanspaces.com/icons/3433554/google-icon-md.png',
+        iconUrl: 'assets/images/marker-icon.png',
       }),
     });
     this.markers.push(marker);

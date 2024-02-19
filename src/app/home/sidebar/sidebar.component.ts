@@ -123,7 +123,7 @@ export class SidebarComponent {
             icon: icon({
               iconSize: [ 25, 41 ],
               iconAnchor: [ 13, 41 ],
-              iconUrl: 'https://creazilla-store.fra1.digitaloceanspaces.com/icons/3433554/google-icon-md.png',
+              iconUrl: 'assets/images/marker-icon.png',
             }),
           }).bindPopup(`
             <p><span class="font-bold">Coordenadas:</span> ${ registerVisit.geom.coordinates[1] }, ${ registerVisit.geom.coordinates[0] }</p>
