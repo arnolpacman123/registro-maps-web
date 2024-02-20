@@ -62,7 +62,9 @@ export class SidebarComponent {
   constructor(
     private spinner: NgxSpinnerService,
   ) {
+    this.spinner.show();
     this.homeService.getPersons().then((persons) => {
+      this.spinner.hide();
       this.persons = persons;
     });
   }

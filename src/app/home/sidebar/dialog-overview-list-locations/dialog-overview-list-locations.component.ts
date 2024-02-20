@@ -17,7 +17,6 @@ import { FormControl, ReactiveFormsModule } from "@angular/forms";
 import { ReplaySubject, Subject, take, takeUntil } from "rxjs";
 import { User } from "../../interfaces/user.interface";
 import { MatButton } from "@angular/material/button";
-import { list } from "postcss";
 import { HomeService } from "../../services/home.service";
 import { NgxSpinnerModule, NgxSpinnerService } from "ngx-spinner";
 
