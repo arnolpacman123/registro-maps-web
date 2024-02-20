@@ -24,6 +24,7 @@
     "@runette/ngx-leaflet-locate": "^2.0.6",
     "leaflet": "^1.9.4",
     "ngx-mat-select-search": "^7.0.5",
+    "ngx-spinner": "^16.0.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"

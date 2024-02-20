@@ -18,6 +18,7 @@ import {
 } from "./dialog-overview-list-locations/dialog-overview-list-locations.component";
 import { RegisterVisit } from "../interfaces/register-visit.interface";
 import { DatePipe } from "@angular/common";
+import { NgxSpinnerModule, NgxSpinnerService } from "ngx-spinner";
 
 export interface Option {
   name: string;
@@ -26,19 +27,11 @@ export interface Option {
   icon: string;
 }
 
-export interface ParamsRegisterVisit {
-  name: string;
-  coordinates: {
-    lat: number;
-    lng: number;
-  };
-  users?: User[];
-}
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [ MapComponent, MatSidenavModule, MatCardModule, MatButton, ContentComponent, MatIcon, DatePipe ],
+  imports: [ MapComponent, MatSidenavModule, MatCardModule, MatButton, ContentComponent, MatIcon, DatePipe, NgxSpinnerModule ],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css',
 })
@@ -66,7 +59,9 @@ export class SidebarComponent {
   registerVisits: RegisterVisit[] = [];
   userOptionSelected = false;
 
-  constructor() {
+  constructor(
+    private spinner: NgxSpinnerService,
+  ) {
     this.homeService.getPersons().then((persons) => {
       this.persons = persons;
     });
@@ -90,7 +85,9 @@ export class SidebarComponent {
   }
 
   async openDialogRegisterVisit() {
+    await this.spinner.show();
     const mapData = await this.homeService.getMapData(this.myLocation?.lat!, this.myLocation?.lng!);
+    await this.spinner.hide();
     const dialogRef = this.dialog.open(DialogOverviewRegisterVisitComponent, {
       data: {
         users: this.persons,

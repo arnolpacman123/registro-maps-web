@@ -19,6 +19,7 @@ import { User } from "../../interfaces/user.interface";
 import { MatButton } from "@angular/material/button";
 import { list } from "postcss";
 import { HomeService } from "../../services/home.service";
+import { NgxSpinnerModule, NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-dialog-overview-list-locations',
@@ -36,7 +37,8 @@ import { HomeService } from "../../services/home.service";
     NgxMatSelectSearchModule,
     ReactiveFormsModule,
     MatButton,
-    MatCardActions
+    MatCardActions,
+    NgxSpinnerModule
   ],
   templateUrl: './dialog-overview-list-locations.component.html',
   styleUrl: './dialog-overview-list-locations.component.css'
@@ -45,6 +47,7 @@ export class DialogOverviewListLocationsComponent implements OnInit, OnDestroy, 
   constructor(
     public dialogRef: MatDialogRef<DialogOverviewListLocationsComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    private spinner: NgxSpinnerService
   ) {
   }
 
@@ -115,10 +118,16 @@ export class DialogOverviewListLocationsComponent implements OnInit, OnDestroy, 
   }
 
 
-  listLocations() {
+  async listLocations() {
+    await this.spinner.show();
     this.homeService.allRegisterVisitsByPersonName(this.userCtrl.value!.name).subscribe({
       next: (data) => {
+        this.spinner.hide();
         this.dialogRef.close(data);
+      },
+      error: (error) => {
+        this.spinner.hide();
+        console.error(error);
       }
     });
   }

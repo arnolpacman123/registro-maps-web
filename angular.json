@@ -28,6 +28,7 @@
               "@angular/material/prebuilt-themes/indigo-pink.css",
               "./node_modules/leaflet/dist/leaflet.css",
               "./node_modules/leaflet.locatecontrol/dist/L.Control.Locate.min.css",
+              "./node_modules/ngx-spinner/animations/ball-scale-multiple.css",
               "src/styles.css"
             ],
             "scripts": [

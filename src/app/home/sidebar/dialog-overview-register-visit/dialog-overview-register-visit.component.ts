@@ -27,6 +27,7 @@ import { ReplaySubject, Subject, take, takeUntil } from "rxjs";
 import { MapResponse } from "../../interfaces/map-response.interface";
 import { RegisterVisitRequest } from "../../interfaces/register-visit-request.interface";
 import { HomeService } from "../../services/home.service";
+import { NgxSpinnerModule, NgxSpinnerService } from "ngx-spinner";
 
 export interface DialogData {
   users: User[];
@@ -61,6 +62,7 @@ export interface DialogData {
     AsyncPipe,
     MatOption,
     NgxMatSelectSearchModule,
+    NgxSpinnerModule,
   ],
   templateUrl: './dialog-overview-register-visit.component.html',
   styleUrl: './dialog-overview-register-visit.component.css'
@@ -69,6 +71,7 @@ export class DialogOverviewRegisterVisitComponent implements OnInit, AfterViewIn
   constructor(
     public dialogRef: MatDialogRef<DialogOverviewRegisterVisitComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    private spinner: NgxSpinnerService,
   ) {
   }
 
@@ -143,20 +146,23 @@ export class DialogOverviewRegisterVisitComponent implements OnInit, AfterViewIn
     this.dialogRef.close();
   }
 
-  save() {
+  async save() {
     const registerVisitRequest: RegisterVisitRequest = {
       address: this.addressCtrl.value,
       personName: this.userCtrl.value!.name,
       coordinates: [ this.latCtrl.value, this.lngCtrl.value ],
       description: this.descriptionCtrl.value || ""
     };
+    await this.spinner.show();
     this.homeService.registerVisit(registerVisitRequest).subscribe({
       next: () => {
+        this.spinner.hide();
         this.dialogRef.close({
-          success: true
+          success: true,
         });
       },
-      error: (error) => {
+      error: async (error) => {
+        await this.spinner.hide();
         console.error(error);
       }
     });
