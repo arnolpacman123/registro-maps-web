@@ -1,5 +1,8 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { LeafletModule, LeafletControlLayersConfig } from "@asymmetrik/ngx-leaflet";
+import {
+  LeafletModule,
+  LeafletControlLayersConfig,
+} from '@asymmetrik/ngx-leaflet';
 import {
   latLng,
   MapOptions,
@@ -10,24 +13,24 @@ import {
   LatLng,
   LeafletEvent,
   Marker,
-  icon
-} from "leaflet";
-import { NgxLeafletLocateModule } from "@runette/ngx-leaflet-locate";
+  icon,
+} from 'leaflet';
+import { NgxLeafletLocateModule } from '@runette/ngx-leaflet-locate';
 
 @Component({
   selector: 'app-map',
   standalone: true,
-  imports: [ LeafletModule, NgxLeafletLocateModule ],
+  imports: [LeafletModule, NgxLeafletLocateModule],
   templateUrl: './map.component.html',
-  styleUrl: './map.component.css'
+  styleUrl: './map.component.css',
 })
 export class MapComponent {
   options: MapOptions = {
     layers: [
       tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
         maxZoom: 20,
-        subdomains: [ 'mt0', 'mt1', 'mt2', 'mt3' ]
-      })
+        subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
+      }),
     ],
     attributionControl: false,
     zoom: 13,
@@ -37,17 +40,26 @@ export class MapComponent {
 
   layersControl: LeafletControlLayersConfig = {
     baseLayers: {
-      'Google Maps': tileLayer('https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
-        maxZoom: 22,
-        subdomains: [ 'mt0', 'mt1', 'mt2', 'mt3' ],
-      }),
-      'Google Satellite': tileLayer('https://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}', {
-        maxZoom: 22,
-        subdomains: [ 'mt0', 'mt1', 'mt2', 'mt3' ],
-      }),
-      'Open Street Map': tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 20,
-      }),
+      'Google Maps': tileLayer(
+        'https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',
+        {
+          maxZoom: 22,
+          subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
+        }
+      ),
+      'Google Satellite': tileLayer(
+        'https://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}',
+        {
+          maxZoom: 22,
+          subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
+        }
+      ),
+      'Open Street Map': tileLayer(
+        'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+        {
+          maxZoom: 20,
+        }
+      ),
     },
     overlays: {},
   };
@@ -88,9 +100,8 @@ export class MapComponent {
   addLocation(myLocation: LatLng) {
     const marker = new Marker(myLocation, {
       icon: icon({
-        iconSize: [ 25, 41 ],
-        iconAnchor: [ 13, 41 ],
-        iconUrl: 'assets/images/marker-icon.png',
+        iconSize: [25, 34],
+        iconUrl: 'assets/images/marker-icon.svg',
       }),
     });
     this.markers.push(marker);
